@@ -120,6 +120,12 @@ variable "system_max_nodes" {
   default     = 2
 }
 
+variable "enable_head_node_group" {
+  description = "Whether to create the Ray head node group"
+  type        = bool
+  default     = false
+}
+
 variable "head_machine_type" {
   description = "Instance type for Ray head nodes"
   type        = string

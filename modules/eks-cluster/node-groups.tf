@@ -44,6 +44,8 @@ resource "aws_eks_node_group" "system" {
 
 # --- Ray head node group ---
 resource "aws_eks_node_group" "ray_head" {
+  count = var.enable_head_node_group ? 1 : 0
+
   cluster_name    = aws_eks_cluster.this.name
   node_group_name = "${var.cluster_name}-ray-head"
   node_role_arn   = aws_iam_role.node.arn

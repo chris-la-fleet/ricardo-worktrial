@@ -17,10 +17,11 @@ module "eks_cluster" {
   system_min_nodes     = var.system_min_nodes
   system_max_nodes     = var.system_max_nodes
 
-  head_machine_type  = var.head_machine_type
-  head_desired_nodes = var.head_desired_nodes
-  head_min_nodes     = var.head_min_nodes
-  head_max_nodes     = var.head_max_nodes
+  enable_head_node_group = var.enable_head_node_group
+  head_machine_type      = var.head_machine_type
+  head_desired_nodes     = var.head_desired_nodes
+  head_min_nodes         = var.head_min_nodes
+  head_max_nodes         = var.head_max_nodes
 
   cpu_worker_machine_type  = var.cpu_worker_machine_type
   cpu_worker_desired_nodes = var.cpu_worker_desired_nodes

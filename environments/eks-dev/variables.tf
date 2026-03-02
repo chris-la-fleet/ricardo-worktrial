@@ -6,7 +6,7 @@ variable "region" {
 variable "cluster_name" {
   description = "EKS cluster name"
   type        = string
-  default     = "ray-eks-dev"
+  default     = "k8s-dev"
 }
 
 variable "kubernetes_version" {
@@ -114,6 +114,12 @@ variable "system_max_nodes" {
   description = "Maximum number of system nodes"
   type        = number
   default     = 2
+}
+
+variable "enable_head_node_group" {
+  description = "Whether to create the Ray head node group"
+  type        = bool
+  default     = false
 }
 
 variable "head_machine_type" {
