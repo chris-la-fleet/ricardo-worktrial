@@ -148,9 +148,9 @@ resource "aws_eks_node_group" "gpu_workers" {
   }
 
   labels = {
-    role               = "gpu-worker"
-    "ray.io/node-type" = "worker"
-    accelerator        = "h100"
+    role                     = "gpu-worker"
+    "ray.io/node-type"       = "worker"
+    (var.gpu_node_label_key) = var.gpu_node_label_value
   }
 
   taint {

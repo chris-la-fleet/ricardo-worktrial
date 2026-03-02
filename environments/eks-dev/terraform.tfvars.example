@@ -15,10 +15,19 @@ public_access_cidrs = ["0.0.0.0/0"]
 enable_gpu_node_group = false
 gpu_az                = "us-west-2a"
 gpu_machine_type      = "p5.48xlarge"
+gpu_node_label_key    = "accelerator"
+gpu_node_label_value  = "h100"
 gpu_ami_type          = "AL2023_x86_64_NVIDIA"
 gpu_desired_nodes     = 0
 gpu_min_nodes         = 0
 gpu_max_nodes         = 4
+
+# Optional test preset:
+# gpu_machine_type     = "g4dn.xlarge"
+# gpu_node_label_value = "gpu-testing"
+# gpu_desired_nodes    = 2
+# gpu_min_nodes        = 2
+# kueue_gpu_quota      = 2
 
 cpu_worker_machine_type = "m5.4xlarge"
 cpu_worker_ami_type     = "AL2023_x86_64_STANDARD"

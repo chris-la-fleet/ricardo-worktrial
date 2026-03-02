@@ -34,6 +34,8 @@ module "eks_cluster" {
   enable_gpu_node_group = var.enable_gpu_node_group
   gpu_az                = var.gpu_az
   gpu_machine_type      = var.gpu_machine_type
+  gpu_node_label_key    = var.gpu_node_label_key
+  gpu_node_label_value  = var.gpu_node_label_value
   gpu_desired_nodes     = var.gpu_desired_nodes
   gpu_min_nodes         = var.gpu_min_nodes
   gpu_max_nodes         = var.gpu_max_nodes
@@ -69,6 +71,8 @@ module "kueue" {
 
   namespace             = var.kueue_namespace
   gpu_quota             = var.kueue_gpu_quota
+  gpu_node_label_key    = var.gpu_node_label_key
+  gpu_node_label_value  = var.gpu_node_label_value
   local_queue_namespace = var.kueue_local_queue_namespace
   local_queue_name      = var.kueue_local_queue_name
   cluster_queue_name    = var.kueue_cluster_queue_name
