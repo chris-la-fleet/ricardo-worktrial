@@ -1,0 +1,50 @@
+region             = "us-west-2"
+cluster_name       = "ray-eks-dev"
+kubernetes_version = "1.32"
+vpc_cidr           = "10.0.0.0/16"
+
+availability_zones = [
+  "us-west-2a",
+  "us-west-2b",
+  "us-west-2c",
+]
+
+public_access_cidrs = ["0.0.0.0/0"]
+
+# CPU-first defaults
+enable_gpu_node_group = false
+gpu_az                = "us-west-2a"
+gpu_machine_type      = "p5.48xlarge"
+gpu_desired_nodes     = 0
+gpu_min_nodes         = 0
+gpu_max_nodes         = 4
+
+cpu_worker_machine_type = "m5.4xlarge"
+cpu_worker_desired_nodes = 0
+cpu_worker_min_nodes     = 0
+cpu_worker_max_nodes     = 8
+
+system_machine_type = "m5.xlarge"
+system_desired_nodes = 1
+system_min_nodes     = 1
+system_max_nodes     = 2
+
+head_machine_type = "m5.2xlarge"
+head_desired_nodes = 1
+head_min_nodes     = 1
+head_max_nodes     = 2
+
+# Optional components
+enable_kuberay = false
+
+# Kueue queue defaults
+kueue_namespace             = "kueue-system"
+kueue_local_queue_namespace = "default"
+kueue_local_queue_name      = "default-queue"
+kueue_cluster_queue_name    = "default-cluster-queue"
+kueue_gpu_quota             = 0
+
+# Example generic distributed job (disabled by default)
+enable_example_distributed_job = false
+example_distributed_job_name   = "example-train-job"
+example_distributed_job_image  = "public.ecr.aws/docker/library/python:3.11"
