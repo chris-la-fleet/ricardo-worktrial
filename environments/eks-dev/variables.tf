@@ -181,21 +181,3 @@ variable "kueue_gpu_quota" {
   type        = number
   default     = 0
 }
-
-variable "enable_example_distributed_job" {
-  description = "Whether to create an example generic distributed training job"
-  type        = bool
-  default     = false
-}
-
-variable "example_distributed_job_name" {
-  description = "Name of the example distributed training job"
-  type        = string
-  default     = "example-train-job"
-}
-
-variable "example_distributed_job_image" {
-  description = "Container image for the example distributed training job"
-  type        = string
-  default     = "public.ecr.aws/docker/library/python:3.11"
-}

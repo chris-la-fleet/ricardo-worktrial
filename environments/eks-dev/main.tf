@@ -79,24 +79,3 @@ module "kuberay" {
 
   depends_on = [module.eks_cluster]
 }
-
-module "example_distributed_job" {
-  source = "../../modules/distributed-job"
-
-  create     = var.enable_example_distributed_job
-  name       = var.example_distributed_job_name
-  namespace  = var.kueue_local_queue_namespace
-  queue_name = var.kueue_local_queue_name
-  image      = var.example_distributed_job_image
-
-  command = ["python", "-c"]
-  args = [
-    "import time; print('example distributed job placeholder'); time.sleep(30)",
-  ]
-
-  replicas = 1
-  cpu      = "2"
-  memory   = "4Gi"
-
-  depends_on = [module.kueue]
-}

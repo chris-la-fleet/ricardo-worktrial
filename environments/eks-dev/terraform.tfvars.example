@@ -43,8 +43,3 @@ kueue_local_queue_namespace = "default"
 kueue_local_queue_name      = "default-queue"
 kueue_cluster_queue_name    = "default-cluster-queue"
 kueue_gpu_quota             = 0
-
-# Example generic distributed job (disabled by default)
-enable_example_distributed_job = false
-example_distributed_job_name   = "example-train-job"
-example_distributed_job_image  = "public.ecr.aws/docker/library/python:3.11"

@@ -35,7 +35,6 @@ resource "aws_eks_node_group" "system" {
   tags = local.autoscaler_tags
 
   depends_on = [
-    aws_eks_addon.coredns,
     aws_iam_role_policy_attachment.node_worker,
     aws_iam_role_policy_attachment.node_cni,
     aws_iam_role_policy_attachment.node_ecr,
@@ -78,7 +77,6 @@ resource "aws_eks_node_group" "ray_head" {
   tags = local.autoscaler_tags
 
   depends_on = [
-    aws_eks_addon.coredns,
     aws_iam_role_policy_attachment.node_worker,
     aws_iam_role_policy_attachment.node_cni,
     aws_iam_role_policy_attachment.node_ecr,
@@ -121,7 +119,6 @@ resource "aws_eks_node_group" "cpu_workers" {
   tags = local.autoscaler_tags
 
   depends_on = [
-    aws_eks_addon.coredns,
     aws_iam_role_policy_attachment.node_worker,
     aws_iam_role_policy_attachment.node_cni,
     aws_iam_role_policy_attachment.node_ecr,
@@ -173,7 +170,6 @@ resource "aws_eks_node_group" "gpu_workers" {
   tags = local.autoscaler_tags
 
   depends_on = [
-    aws_eks_addon.coredns,
     aws_iam_role_policy_attachment.node_worker,
     aws_iam_role_policy_attachment.node_cni,
     aws_iam_role_policy_attachment.node_ecr,
