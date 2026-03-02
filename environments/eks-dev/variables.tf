@@ -12,7 +12,7 @@ variable "cluster_name" {
 variable "kubernetes_version" {
   description = "EKS Kubernetes version"
   type        = string
-  default     = "1.32"
+  default     = "1.35"
 }
 
 variable "vpc_cidr" {
@@ -116,6 +116,12 @@ variable "system_max_nodes" {
   default     = 2
 }
 
+variable "system_ami_type" {
+  description = "System node group AMI family"
+  type        = string
+  default     = "AL2023_x86_64_STANDARD"
+}
+
 variable "enable_head_node_group" {
   description = "Whether to create the Ray head node group"
   type        = bool
@@ -144,6 +150,24 @@ variable "head_max_nodes" {
   description = "Maximum number of Ray head nodes"
   type        = number
   default     = 2
+}
+
+variable "head_ami_type" {
+  description = "Ray head node group AMI family"
+  type        = string
+  default     = "AL2023_x86_64_STANDARD"
+}
+
+variable "cpu_worker_ami_type" {
+  description = "CPU worker node group AMI family"
+  type        = string
+  default     = "AL2023_x86_64_STANDARD"
+}
+
+variable "gpu_ami_type" {
+  description = "GPU worker node group AMI family"
+  type        = string
+  default     = "AL2023_x86_64_NVIDIA"
 }
 
 variable "enable_kuberay" {

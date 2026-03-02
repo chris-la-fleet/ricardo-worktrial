@@ -51,15 +51,29 @@ Review and adjust values in `environments/eks-dev/terraform.tfvars`:
   - `enable_head_node_group = false`
   - `enable_kuberay = false`
 
-## 5) Initialize and validate Terraform
+## 5) Configure Terraform remote state
+
+```bash
+cp -n environments/eks-dev/backend.hcl.example environments/eks-dev/backend.hcl
+```
+
+If you still need to create the shared backend resources, use `docs/terraform-remote-state.md`.
+
+Set these values in `environments/eks-dev/backend.hcl`:
+- `bucket`
+- `region` (for example `us-west-2`)
+- `key` (default `eks-dev/terraform.tfstate` is fine)
+- `use_lockfile = true`
+
+## 6) Initialize and validate Terraform
 
 ```bash
 cd environments/eks-dev
-terraform init
+terraform init -reconfigure -backend-config=backend.hcl
 terraform validate
 ```
 
-## 6) Bootstrap apply (cluster first)
+## 7) Bootstrap apply (cluster first)
 
 Because `module.kueue` uses `kubernetes_manifest`, a full first-time plan fails before the cluster exists.
 Bootstrap with a targeted EKS plan/apply:
@@ -71,7 +85,7 @@ terraform apply -auto-approve tfplan.eks
 
 This creates the VPC/EKS/node groups first.
 
-## 7) Configure kubeconfig
+## 8) Configure kubeconfig
 
 After EKS is created:
 
@@ -80,7 +94,7 @@ aws eks update-kubeconfig --region us-west-2 --name k8s-dev
 kubectl get nodes
 ```
 
-## 8) Full stack plan and apply
+## 9) Full stack plan and apply
 
 Now that Kubernetes API is reachable, apply the full infra stack:
 
@@ -93,7 +107,7 @@ This should install:
 - Kueue (`module.kueue`)
 - Optional KubeRay only if `enable_kuberay = true`
 
-## 9) Post-apply checks
+## 10) Post-apply checks
 
 ```bash
 kubectl get pods -n kueue-system
@@ -107,7 +121,7 @@ If enabled:
 kubectl get pods -n ray-system
 ```
 
-## 10) Job submission model in this phase
+## 11) Job submission model in this phase
 
 - Terraform is only for platform infrastructure.
 - User jobs should be submitted through Kubernetes-native manifests (for example via `kubectl apply`) in a later workflow.

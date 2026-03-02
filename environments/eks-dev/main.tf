@@ -16,17 +16,20 @@ module "eks_cluster" {
   system_desired_nodes = var.system_desired_nodes
   system_min_nodes     = var.system_min_nodes
   system_max_nodes     = var.system_max_nodes
+  system_ami_type      = var.system_ami_type
 
   enable_head_node_group = var.enable_head_node_group
   head_machine_type      = var.head_machine_type
   head_desired_nodes     = var.head_desired_nodes
   head_min_nodes         = var.head_min_nodes
   head_max_nodes         = var.head_max_nodes
+  head_ami_type          = var.head_ami_type
 
   cpu_worker_machine_type  = var.cpu_worker_machine_type
   cpu_worker_desired_nodes = var.cpu_worker_desired_nodes
   cpu_worker_min_nodes     = var.cpu_worker_min_nodes
   cpu_worker_max_nodes     = var.cpu_worker_max_nodes
+  cpu_worker_ami_type      = var.cpu_worker_ami_type
 
   enable_gpu_node_group = var.enable_gpu_node_group
   gpu_az                = var.gpu_az
@@ -34,6 +37,7 @@ module "eks_cluster" {
   gpu_desired_nodes     = var.gpu_desired_nodes
   gpu_min_nodes         = var.gpu_min_nodes
   gpu_max_nodes         = var.gpu_max_nodes
+  gpu_ami_type          = var.gpu_ami_type
 }
 
 data "aws_eks_cluster" "selected" {

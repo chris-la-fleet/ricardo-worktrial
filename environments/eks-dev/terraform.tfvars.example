@@ -1,6 +1,6 @@
 region             = "us-west-2"
 cluster_name       = "k8s-dev"
-kubernetes_version = "1.32"
+kubernetes_version = "1.35"
 vpc_cidr           = "10.0.0.0/16"
 
 availability_zones = [
@@ -15,22 +15,26 @@ public_access_cidrs = ["0.0.0.0/0"]
 enable_gpu_node_group = false
 gpu_az                = "us-west-2a"
 gpu_machine_type      = "p5.48xlarge"
+gpu_ami_type          = "AL2023_x86_64_NVIDIA"
 gpu_desired_nodes     = 0
 gpu_min_nodes         = 0
 gpu_max_nodes         = 4
 
 cpu_worker_machine_type = "m5.4xlarge"
+cpu_worker_ami_type     = "AL2023_x86_64_STANDARD"
 cpu_worker_desired_nodes = 0
 cpu_worker_min_nodes     = 0
 cpu_worker_max_nodes     = 8
 
 system_machine_type = "m5.xlarge"
+system_ami_type     = "AL2023_x86_64_STANDARD"
 system_desired_nodes = 1
 system_min_nodes     = 1
 system_max_nodes     = 2
 
 enable_head_node_group = false
 head_machine_type = "m5.2xlarge"
+head_ami_type     = "AL2023_x86_64_STANDARD"
 head_desired_nodes = 1
 head_min_nodes     = 1
 head_max_nodes     = 2

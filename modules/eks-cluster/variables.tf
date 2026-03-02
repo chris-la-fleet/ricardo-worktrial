@@ -9,9 +9,9 @@ variable "cluster_name" {
 }
 
 variable "kubernetes_version" {
-  description = "EKS Kubernetes version. 1.32 is last with AL2 GPU AMI support."
+  description = "EKS Kubernetes version for the control plane and managed node groups."
   type        = string
-  default     = "1.32"
+  default     = "1.35"
 }
 
 variable "vpc_cidr" {
@@ -120,6 +120,12 @@ variable "system_max_nodes" {
   default     = 2
 }
 
+variable "system_ami_type" {
+  description = "AMI family for the system node group"
+  type        = string
+  default     = "AL2023_x86_64_STANDARD"
+}
+
 variable "enable_head_node_group" {
   description = "Whether to create the Ray head node group"
   type        = bool
@@ -148,4 +154,22 @@ variable "head_max_nodes" {
   description = "Maximum number of Ray head nodes"
   type        = number
   default     = 2
+}
+
+variable "head_ami_type" {
+  description = "AMI family for the Ray head node group"
+  type        = string
+  default     = "AL2023_x86_64_STANDARD"
+}
+
+variable "cpu_worker_ami_type" {
+  description = "AMI family for the CPU worker node group"
+  type        = string
+  default     = "AL2023_x86_64_STANDARD"
+}
+
+variable "gpu_ami_type" {
+  description = "AMI family for the GPU worker node group"
+  type        = string
+  default     = "AL2023_x86_64_NVIDIA"
 }

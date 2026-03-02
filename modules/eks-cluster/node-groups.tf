@@ -13,7 +13,7 @@ resource "aws_eks_node_group" "system" {
   node_group_name = "${var.cluster_name}-system"
   node_role_arn   = aws_iam_role.node.arn
   subnet_ids      = module.vpc.private_subnets
-  ami_type        = "AL2_x86_64"
+  ami_type        = var.system_ami_type
   instance_types  = [var.system_machine_type]
   disk_size       = 100
   capacity_type   = "ON_DEMAND"
@@ -50,7 +50,7 @@ resource "aws_eks_node_group" "ray_head" {
   node_group_name = "${var.cluster_name}-ray-head"
   node_role_arn   = aws_iam_role.node.arn
   subnet_ids      = module.vpc.private_subnets
-  ami_type        = "AL2_x86_64"
+  ami_type        = var.head_ami_type
   instance_types  = [var.head_machine_type]
   disk_size       = 150
   capacity_type   = "ON_DEMAND"
@@ -92,7 +92,7 @@ resource "aws_eks_node_group" "cpu_workers" {
   node_group_name = "${var.cluster_name}-cpu-workers"
   node_role_arn   = aws_iam_role.node.arn
   subnet_ids      = module.vpc.private_subnets
-  ami_type        = "AL2_x86_64"
+  ami_type        = var.cpu_worker_ami_type
   instance_types  = [var.cpu_worker_machine_type]
   disk_size       = 200
   capacity_type   = "ON_DEMAND"
@@ -136,7 +136,7 @@ resource "aws_eks_node_group" "gpu_workers" {
   node_group_name = "${var.cluster_name}-gpu-workers"
   node_role_arn   = aws_iam_role.node.arn
   subnet_ids      = [local.gpu_subnet_id]
-  ami_type        = "AL2_x86_64_GPU"
+  ami_type        = var.gpu_ami_type
   instance_types  = [var.gpu_machine_type]
   disk_size       = 500
   capacity_type   = "ON_DEMAND"
