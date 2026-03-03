@@ -45,7 +45,7 @@ variable "gpu_az" {
 }
 
 variable "gpu_machine_type" {
-  description = "GPU worker instance type (for example p5.48xlarge or g4dn.xlarge for gpu-testing)"
+  description = "GPU worker instance type (for example p5.48xlarge for gpu-h100 or g4dn.xlarge for gpu-t4)"
   type        = string
   default     = "p5.48xlarge"
 }
@@ -57,9 +57,9 @@ variable "gpu_node_label_key" {
 }
 
 variable "gpu_node_label_value" {
-  description = "Node label value for GPU workers (for example h100 or gpu-testing)"
+  description = "Node label value for GPU workers (for example gpu-h100 or gpu-t4)"
   type        = string
-  default     = "h100"
+  default     = "gpu-h100"
 }
 
 variable "gpu_desired_nodes" {

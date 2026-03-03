@@ -21,7 +21,7 @@ terraform apply \
 ```
 
 This creates 2 GPU nodes using `g4dn.xlarge` and labels them with
-`accelerator=gpu-testing`.
+`accelerator=gpu-t4`.
 
 ## Submit the distributed smoke test job
 

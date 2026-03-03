@@ -43,7 +43,7 @@ variable "public_access_cidrs" {
 }
 
 variable "gpu_machine_type" {
-  description = "Instance type for GPU workers (for example p5.48xlarge or g4dn.xlarge for gpu-testing)"
+  description = "Instance type for GPU workers (for example p5.48xlarge for gpu-h100 or g4dn.xlarge for gpu-t4)"
   type        = string
   default     = "p5.48xlarge"
 }
@@ -55,9 +55,9 @@ variable "gpu_node_label_key" {
 }
 
 variable "gpu_node_label_value" {
-  description = "Node label value for GPU workers (for example h100 or gpu-testing)"
+  description = "Node label value for GPU workers (for example gpu-h100 or gpu-t4)"
   type        = string
-  default     = "h100"
+  default     = "gpu-h100"
 }
 
 variable "enable_gpu_node_group" {

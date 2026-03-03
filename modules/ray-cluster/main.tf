@@ -83,7 +83,7 @@ resource "kubernetes_manifest" "ray_cluster" {
                 ]
                 nodeSelector = {
                   "ray.io/node-type" = "worker"
-                  accelerator        = "h100"
+                  accelerator        = "gpu-h100"
                 }
                 containers = [
                   {

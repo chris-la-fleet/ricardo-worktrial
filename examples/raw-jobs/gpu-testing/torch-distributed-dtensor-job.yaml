@@ -34,7 +34,7 @@ spec:
       subdomain: dtensor-mesh-test
       nodeSelector:
         role: gpu-worker
-        accelerator: gpu-testing
+        accelerator: gpu-t4
       tolerations:
         - key: nvidia.com/gpu
           operator: Equal
