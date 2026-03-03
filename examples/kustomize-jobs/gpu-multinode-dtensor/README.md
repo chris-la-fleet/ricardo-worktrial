@@ -24,8 +24,5 @@ kubectl get pods -l app=dtensor-mesh-test -w
 kubectl logs -l app=dtensor-mesh-test --prefix --all-containers=true
 ```
 
-## Cleanup
-
-```bash
-uv run brrr render examples/kustomize-jobs/gpu-multinode-dtensor/job-config.yaml | kubectl delete -f -
-```
+The rendered `Job` and pods are cleaned up automatically after completion.
+The headless `Service` is intentionally kept for DNS and has no compute cost.

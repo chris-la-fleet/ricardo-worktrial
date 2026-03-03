@@ -15,8 +15,5 @@ uv run brrr render examples/kustomize-jobs/non-ray-hello/job-config.yaml
 uv run brrr submit examples/kustomize-jobs/non-ray-hello/job-config.yaml
 ```
 
-## Cleanup
-
-```bash
-uv run brrr render examples/kustomize-jobs/non-ray-hello/job-config.yaml | kubectl delete -f -
-```
+The rendered `Job` and pods are cleaned up automatically after completion.
+The headless `Service` is intentionally kept for DNS and has no compute cost.

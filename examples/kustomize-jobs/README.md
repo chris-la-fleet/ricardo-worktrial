@@ -19,6 +19,10 @@ uv run brrr render examples/kustomize-jobs/gpu-multinode-dtensor/job-config.yaml
 uv run brrr submit examples/kustomize-jobs/gpu-multinode-dtensor/job-config.yaml
 ```
 
+Rendered workload objects are cleaned up automatically after completion.
+For non-Ray jobs, the headless `Service` is kept for stable pod DNS and has no
+compute cost.
+
 ## Current examples
 
 - `gpu-multinode-dtensor/`

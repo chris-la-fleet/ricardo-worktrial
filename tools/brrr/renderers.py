@@ -10,6 +10,7 @@ from .models import ComputeConfig, JobConfig
 
 
 QUEUE_LABEL_KEY = "kueue.x-k8s.io/queue-name"
+DEFAULT_TTL_SECONDS_AFTER_FINISHED = 600
 
 
 def render_manifests(job: JobConfig, compute: ComputeConfig) -> list[dict[str, Any]]:
@@ -103,7 +104,7 @@ def _render_batch_job(job: JobConfig, compute: ComputeConfig) -> list[dict[str, 
             "completionMode": "Indexed",
             "backoffLimit": 0,
             "suspend": job.suspend,
-            "ttlSecondsAfterFinished": job.ttl_seconds_after_finished,
+            "ttlSecondsAfterFinished": DEFAULT_TTL_SECONDS_AFTER_FINISHED,
             "template": {
                 "metadata": {"labels": {"app": app_name}},
                 "spec": {
@@ -168,5 +169,6 @@ def _render_ray_job(job: JobConfig, compute: ComputeConfig) -> dict[str, Any]:
             "clusterSelector": {"ray.io/cluster": cluster_name},
             "submissionMode": "K8sJobMode",
             "suspend": job.suspend,
+            "ttlSecondsAfterFinished": DEFAULT_TTL_SECONDS_AFTER_FINISHED,
         },
     }

@@ -26,7 +26,6 @@ class JobConfig(BaseModel):
     tags: dict[str, str] = Field(default_factory=dict)
     ray_cluster_name: str | None = None
     master_port: int = Field(default=29500, ge=1, le=65535)
-    ttl_seconds_after_finished: int = Field(default=600, ge=0)
     suspend: bool = True
 
     @model_validator(mode="after")

@@ -16,8 +16,4 @@ uv run brrr render examples/kustomize-jobs/rayjob-remote-task-fanout/job-config.
 uv run brrr submit examples/kustomize-jobs/rayjob-remote-task-fanout/job-config.yaml
 ```
 
-## Cleanup
-
-```bash
-uv run brrr render examples/kustomize-jobs/rayjob-remote-task-fanout/job-config.yaml | kubectl delete -f -
-```
+The rendered RayJob resources are cleaned up automatically after completion.
