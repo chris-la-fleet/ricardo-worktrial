@@ -5,12 +5,15 @@
 - configured the tf state s3 bucket as a versioned bucket, so that we can rollback to older deployments if needed
 - added optional compute configs for Ray. (1) added config for dedicated head/driver node, (2) added support for KubeRay
 - separated demos based on raw-jobs/ (executed using kubectl) and kustomize-jobs/ (using job templates).
+- OpenLens for k8s observability
+- standardized on `rayjob-remote-task-fanout` as the canonical KubeRay raw-job example.
 
 future:
 - job templates using Kustomize, to abstract away Helm and k8s manifests from scientists. better ergonomcis and guardrails. users just need to edit image, command, resources, queue. separates job submission from the platform infra
 - a bunch of runnable job submission examples
 - a UI?
 - mirror across GKE and EKS
+- make explicit teardown unnecessary
 - multi-node single region jobs, where we can queue in any region but the job remains single-region.
 - k8s cluster scales down to zero when idle (except for the system node)
 

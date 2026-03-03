@@ -70,6 +70,18 @@ variable "gpu_worker_gpu_count" {
   default     = 8
 }
 
+variable "gpu_worker_node_label_key" {
+  description = "Node label key for GPU workers"
+  type        = string
+  default     = "accelerator"
+}
+
+variable "gpu_worker_node_label_value" {
+  description = "Node label value for GPU workers"
+  type        = string
+  default     = "gpu-t4"
+}
+
 variable "cpu_worker_replicas" {
   description = "Number of CPU worker replicas"
   type        = number
@@ -86,4 +98,16 @@ variable "cpu_worker_memory" {
   description = "Memory request/limit per CPU worker"
   type        = string
   default     = "48Gi"
+}
+
+variable "cpu_worker_node_label_key" {
+  description = "Node label key for CPU workers"
+  type        = string
+  default     = "role"
+}
+
+variable "cpu_worker_node_label_value" {
+  description = "Node label value for CPU workers"
+  type        = string
+  default     = "cpu-worker"
 }

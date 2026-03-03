@@ -47,7 +47,7 @@ variable "gpu_az" {
 variable "gpu_machine_type" {
   description = "GPU worker instance type (for example p5.48xlarge for gpu-h100 or g4dn.xlarge for gpu-t4)"
   type        = string
-  default     = "p5.48xlarge"
+  default     = "g4dn.xlarge"
 }
 
 variable "gpu_node_label_key" {
@@ -59,7 +59,7 @@ variable "gpu_node_label_key" {
 variable "gpu_node_label_value" {
   description = "Node label value for GPU workers (for example gpu-h100 or gpu-t4)"
   type        = string
-  default     = "gpu-h100"
+  default     = "gpu-t4"
 }
 
 variable "gpu_desired_nodes" {
@@ -222,4 +222,118 @@ variable "kueue_gpu_quota" {
   description = "GPU quota configured in Kueue ClusterQueue"
   type        = number
   default     = 0
+}
+
+variable "enable_ray_cluster" {
+  description = "Whether to create an optional RayCluster for infra-only wiring"
+  type        = bool
+  default     = false
+}
+
+variable "ray_cluster_name" {
+  description = "RayCluster name used for infra-only wiring"
+  type        = string
+  default     = "default-ray-cluster"
+}
+
+variable "ray_cluster_namespace" {
+  description = "Namespace where the RayCluster will be created"
+  type        = string
+  default     = "default"
+}
+
+variable "ray_cluster_ray_version" {
+  description = "Ray version for the optional RayCluster"
+  type        = string
+  default     = "2.41.0"
+}
+
+variable "ray_cluster_ray_image" {
+  description = "Optional Ray image override for the RayCluster (empty uses module default)"
+  type        = string
+  default     = ""
+}
+
+variable "ray_cluster_queue_name" {
+  description = "Kueue LocalQueue name used by the RayCluster"
+  type        = string
+  default     = "default-queue"
+}
+
+variable "ray_cluster_head_cpu" {
+  description = "CPU request for the RayCluster head pod"
+  type        = string
+  default     = "4"
+}
+
+variable "ray_cluster_head_memory" {
+  description = "Memory request for the RayCluster head pod"
+  type        = string
+  default     = "16Gi"
+}
+
+variable "ray_cluster_cpu_worker_replicas" {
+  description = "Number of RayCluster CPU worker replicas"
+  type        = number
+  default     = 0
+}
+
+variable "ray_cluster_cpu_worker_cpu" {
+  description = "CPU request for each RayCluster CPU worker"
+  type        = string
+  default     = "14"
+}
+
+variable "ray_cluster_cpu_worker_memory" {
+  description = "Memory request for each RayCluster CPU worker"
+  type        = string
+  default     = "48Gi"
+}
+
+variable "ray_cluster_cpu_worker_label_key" {
+  description = "Node selector label key for RayCluster CPU workers"
+  type        = string
+  default     = "role"
+}
+
+variable "ray_cluster_cpu_worker_label_value" {
+  description = "Node selector label value for RayCluster CPU workers"
+  type        = string
+  default     = "cpu-worker"
+}
+
+variable "ray_cluster_gpu_worker_replicas" {
+  description = "Number of RayCluster GPU worker replicas"
+  type        = number
+  default     = 0
+}
+
+variable "ray_cluster_gpu_worker_cpu" {
+  description = "CPU request for each RayCluster GPU worker"
+  type        = string
+  default     = "24"
+}
+
+variable "ray_cluster_gpu_worker_memory" {
+  description = "Memory request for each RayCluster GPU worker"
+  type        = string
+  default     = "128Gi"
+}
+
+variable "ray_cluster_gpu_worker_gpu_count" {
+  description = "GPU count for each RayCluster GPU worker"
+  type        = number
+  default     = 8
+}
+
+variable "ray_cluster_gpu_worker_label_key" {
+  description = "Node selector label key for RayCluster GPU workers"
+  type        = string
+  default     = "accelerator"
+}
+
+variable "ray_cluster_gpu_worker_label_value" {
+  description = "Node selector label value for RayCluster GPU workers"
+  type        = string
+  default     = "gpu-t4"
 }

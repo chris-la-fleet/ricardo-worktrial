@@ -88,3 +88,29 @@ module "kuberay" {
 
   depends_on = [module.eks_cluster]
 }
+
+module "ray_cluster" {
+  source = "../../modules/ray-cluster"
+
+  create                      = var.enable_kuberay && var.enable_ray_cluster
+  name                        = var.ray_cluster_name
+  namespace                   = var.ray_cluster_namespace
+  ray_version                 = var.ray_cluster_ray_version
+  ray_image                   = var.ray_cluster_ray_image
+  kueue_queue_name            = var.ray_cluster_queue_name
+  head_cpu                    = var.ray_cluster_head_cpu
+  head_memory                 = var.ray_cluster_head_memory
+  cpu_worker_replicas         = var.ray_cluster_cpu_worker_replicas
+  cpu_worker_cpu              = var.ray_cluster_cpu_worker_cpu
+  cpu_worker_memory           = var.ray_cluster_cpu_worker_memory
+  cpu_worker_node_label_key   = var.ray_cluster_cpu_worker_label_key
+  cpu_worker_node_label_value = var.ray_cluster_cpu_worker_label_value
+  gpu_worker_replicas         = var.ray_cluster_gpu_worker_replicas
+  gpu_worker_cpu              = var.ray_cluster_gpu_worker_cpu
+  gpu_worker_memory           = var.ray_cluster_gpu_worker_memory
+  gpu_worker_gpu_count        = var.ray_cluster_gpu_worker_gpu_count
+  gpu_worker_node_label_key   = var.ray_cluster_gpu_worker_label_key
+  gpu_worker_node_label_value = var.ray_cluster_gpu_worker_label_value
+
+  depends_on = [module.eks_cluster, module.kueue, module.kuberay]
+}

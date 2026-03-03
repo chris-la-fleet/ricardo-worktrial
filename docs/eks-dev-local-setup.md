@@ -50,6 +50,19 @@ Review and adjust values in `environments/eks-dev/terraform.tfvars`:
   - `enable_gpu_node_group = false`
   - `enable_head_node_group = false`
   - `enable_kuberay = false`
+  - `enable_ray_cluster = false`
+- Optional infra-only demo preset (KubeRay + RayCluster wiring):
+
+```hcl
+enable_kuberay               = true
+enable_ray_cluster           = true
+enable_head_node_group       = true
+cpu_worker_desired_nodes     = 2
+cpu_worker_min_nodes         = 2
+ray_cluster_cpu_worker_replicas = 2
+```
+
+- This preset only provisions platform resources; demo jobs remain in `examples/`.
 - For a cheap 2-node GPU smoke test, use `examples/raw-jobs/gpu-multinode-dtensor/eks-dev-gpu-multinode-dtensor.tfvars` to override the base config at `environments/eks-dev/terraform.tfvars`.
 
 ## 5) Configure Terraform remote state
@@ -95,6 +108,8 @@ aws eks update-kubeconfig --region us-west-2 --name k8s-dev
 kubectl get nodes
 ```
 
+If you changed `region` or cluster name in your `terraform.tfvars`, use those values in the `update-kubeconfig` command.
+
 ## 9) Full stack plan and apply
 
 Now that Kubernetes API is reachable, apply the full infra stack:
@@ -120,6 +135,8 @@ If enabled:
 
 ```bash
 kubectl get pods -n ray-system
+kubectl get rayclusters -A
+kubectl get rayjobs -A
 ```
 
 ## 11) Job submission model in this phase
@@ -127,3 +144,24 @@ kubectl get pods -n ray-system
 - Terraform is only for platform infrastructure.
 - User jobs should be submitted through Kubernetes-native manifests (for example via `kubectl apply`) in a later workflow.
 - Kustomize/API/UI job submission ergonomics are explicitly deferred to a later phase.
+
+## 12) Run example job (separate from Terraform)
+
+Terraform remains infra-only; the runnable demo code stays in `examples/`.
+
+RayJob example (`rayjob-remote-task-fanout`):
+
+```bash
+kubectl apply -f ../../examples/raw-jobs/rayjob-remote-task-fanout/rayjob-remote-task-fanout.yaml
+kubectl get rayjobs -n default
+kubectl get jobs -n default
+kubectl logs -n default job/<submitter-job-name>
+kubectl delete -f ../../examples/raw-jobs/rayjob-remote-task-fanout/rayjob-remote-task-fanout.yaml
+```
+
+Note: Submitter job names come from `kubectl get jobs -n default` and usually start with the RayJob name.
+
+If you customize infra variables, keep these aligned between Terraform and the RayJob fanout manifest:
+- `ray_cluster_name` <-> `spec.clusterSelector.ray.io/cluster`
+- `ray_cluster_namespace` <-> RayJob namespace
+- `ray_cluster_queue_name` / `kueue_local_queue_name` <-> `kueue.x-k8s.io/queue-name`

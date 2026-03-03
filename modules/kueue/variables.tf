@@ -37,7 +37,7 @@ variable "gpu_node_label_key" {
 variable "gpu_node_label_value" {
   description = "Node label value to select GPU nodes for the ResourceFlavor"
   type        = string
-  default     = "gpu-h100"
+  default     = "gpu-t4"
 }
 
 variable "cpu_node_label_key" {

@@ -13,6 +13,7 @@ resource "kubernetes_manifest" "ray_cluster" {
       namespace = var.namespace
       labels = {
         "kueue.x-k8s.io/queue-name" = var.kueue_queue_name
+        "ray.io/cluster"            = var.name
       }
     }
     spec = {
@@ -82,8 +83,8 @@ resource "kubernetes_manifest" "ray_cluster" {
                   },
                 ]
                 nodeSelector = {
-                  "ray.io/node-type" = "worker"
-                  accelerator        = "gpu-h100"
+                  "ray.io/node-type"              = "worker"
+                  (var.gpu_worker_node_label_key) = var.gpu_worker_node_label_value
                 }
                 containers = [
                   {
@@ -125,8 +126,8 @@ resource "kubernetes_manifest" "ray_cluster" {
                   },
                 ]
                 nodeSelector = {
-                  "ray.io/node-type" = "worker"
-                  role               = "cpu-worker"
+                  "ray.io/node-type"              = "worker"
+                  (var.cpu_worker_node_label_key) = var.cpu_worker_node_label_value
                 }
                 containers = [
                   {

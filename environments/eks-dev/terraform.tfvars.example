@@ -14,9 +14,9 @@ public_access_cidrs = ["0.0.0.0/0"]
 # CPU-first defaults
 enable_gpu_node_group = false
 gpu_az                = "us-west-2a"
-gpu_machine_type      = "p5.48xlarge"
+gpu_machine_type      = "g4dn.xlarge"
 gpu_node_label_key    = "accelerator"
-gpu_node_label_value  = "gpu-h100"
+gpu_node_label_value  = "gpu-t4"
 gpu_ami_type          = "AL2023_x86_64_NVIDIA"
 gpu_desired_nodes     = 0
 gpu_min_nodes         = 0
@@ -50,6 +50,34 @@ head_max_nodes     = 2
 
 # Optional components
 enable_kuberay = false
+
+# -----------------------------------------------------------------------------
+# Infra-only preset: multi-node KubeRay + RayCluster demo profile (commented)
+# - Keeps app/workload logic out of infra defaults
+# - Uncomment to enable a CPU-only multi-node Ray cluster baseline
+# -----------------------------------------------------------------------------
+# enable_kuberay                  = true
+# enable_ray_cluster              = true
+# enable_head_node_group          = true
+# cpu_worker_desired_nodes        = 2
+# cpu_worker_min_nodes            = 2
+# ray_cluster_cpu_worker_replicas = 2
+# ray_cluster_queue_name          = "default-queue"
+#
+# Optional GPU RayCluster overrides (only if enabling GPU workers)
+# gpu_machine_type                  = "g4dn.xlarge"
+# gpu_node_label_value              = "gpu-t4"
+# ray_cluster_gpu_worker_replicas    = 1
+# ray_cluster_gpu_worker_cpu         = "8"
+# ray_cluster_gpu_worker_memory      = "32Gi"
+# ray_cluster_gpu_worker_gpu_count   = 1
+# ray_cluster_gpu_worker_label_key   = "accelerator"
+# ray_cluster_gpu_worker_label_value = "gpu-t4"
+#
+# Optional CPU worker label overrides (only if your CPU node group labels differ)
+# Ensure overrides exactly match labels on the actual CPU worker node group.
+# ray_cluster_cpu_worker_label_key   = "role"
+# ray_cluster_cpu_worker_label_value = "cpu-worker"
 
 # Kueue queue defaults
 kueue_namespace             = "kueue-system"
