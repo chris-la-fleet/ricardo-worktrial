@@ -1,0 +1,6 @@
+gpu_type: gpu-t4
+gpus_per_worker: 1
+min_workers: 2
+max_workers: 2
+cpu: "2"
+memory: 8Gi

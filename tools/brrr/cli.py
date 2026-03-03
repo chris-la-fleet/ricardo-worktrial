@@ -88,7 +88,7 @@ def submit(
 
     command = ["kubectl", "apply", "-f", "-"]
     if dry_run:
-        command.extend(["--dry-run", dry_run])
+        command.append(f"--dry-run={dry_run}")
 
     process = subprocess.run(
         command,

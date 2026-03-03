@@ -1,0 +1,22 @@
+name: rayjob-remote-task-fanout
+workload_type: rayjob
+namespace: default
+queue: default-queue
+entrypoint: |
+  python - <<'PY'
+  import ray
+  import socket
+
+  ray.init()
+
+  @ray.remote(scheduling_strategy="SPREAD")
+  def host_task():
+      return socket.gethostname()
+
+  task_count = 16
+  hosts = ray.get([host_task.remote() for _ in range(task_count)])
+  print(ray.cluster_resources())
+
+  unique_hosts = sorted(set(hosts))
+  print(f"summary: tasks={task_count}, hostnames={unique_hosts}")
+  PY
