@@ -50,7 +50,7 @@ Review and adjust values in `environments/eks-dev/terraform.tfvars`:
   - `enable_gpu_node_group = false`
   - `enable_head_node_group = false`
   - `enable_kuberay = false`
-- For a cheap 2-node GPU smoke test, use `examples/raw-jobs/gpu-testing/eks-dev-gpu-testing.tfvars`.
+- For a cheap 2-node GPU smoke test, use `examples/raw-jobs/gpu-multinode-dtensor/eks-dev-gpu-multinode-dtensor.tfvars` to override the base config at `environments/eks-dev/terraform.tfvars`.
 
 ## 5) Configure Terraform remote state
 

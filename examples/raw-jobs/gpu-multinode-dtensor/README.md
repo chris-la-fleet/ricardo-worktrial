@@ -1,4 +1,4 @@
-# GPU Testing Example (2-node torch distributed)
+# GPU Multinode DTensor Example (2-node torch distributed)
 
 This raw-jobs example uses `kubectl` and submits a distributed
 PyTorch smoke test that:
@@ -17,7 +17,7 @@ capacity profile. Enable it from `environments/eks-dev`:
 ```bash
 terraform apply \
   -var-file=terraform.tfvars \
-  -var-file=../../examples/raw-jobs/gpu-testing/eks-dev-gpu-testing.tfvars
+  -var-file=../../examples/raw-jobs/gpu-multinode-dtensor/eks-dev-gpu-multinode-dtensor.tfvars
 ```
 
 This creates 2 GPU nodes using `g4dn.xlarge` and labels them with
@@ -26,7 +26,7 @@ This creates 2 GPU nodes using `g4dn.xlarge` and labels them with
 ## Submit the distributed smoke test job
 
 ```bash
-kubectl apply -f ../../examples/raw-jobs/gpu-testing/torch-distributed-dtensor-job.yaml
+kubectl apply -f ../../examples/raw-jobs/gpu-multinode-dtensor/torch-distributed-dtensor-job.yaml
 ```
 
 Kueue will admit the job from `default-queue` once capacity is available.
@@ -48,7 +48,7 @@ Expected log lines include:
 ## Cleanup
 
 ```bash
-kubectl delete -f ../../examples/raw-jobs/gpu-testing/torch-distributed-dtensor-job.yaml
+kubectl delete -f ../../examples/raw-jobs/gpu-multinode-dtensor/torch-distributed-dtensor-job.yaml
 ```
 
 To scale GPU workers back down, remove the test var-file override and apply
