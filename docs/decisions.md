@@ -7,19 +7,25 @@
 - separated demos based on raw-jobs/ (executed using kubectl) and kustomize-jobs/ (using job templates).
 - OpenLens for k8s observability
 - k8s cluster scales down to zero when idle (except for the system node)
-
-future:
 - job templates using `brrr` (high-level JobConfig/ComputeConfig rendered to k8s), to abstract away Helm and raw manifests from scientists. users edit job + compute config while platform guardrails stay centralized.
+- chose manual Jinja temlpating over Kustomize plugin because the latter was a leaky abstraction and I wanted a clean UX.
+
+# future
 - mirror across GKE and EKS
 - make explicit teardown unnecessary
 - multi-node single region jobs, where we can queue in any region but the job remains single-region. and demo gang scheduling (the job gets places when all requried machines are available)
 
+# Example jobs
+- hello world CPU queue
+- toy multi-node GPU jobs. (1) pytorch distributed dtensor, 2x gpu nodes (2) ray cluster_resources and spread tasks, heterogeneous workers (2 different gpu types, and 2 different cpu types)
+- gang scheduling of a 4 8xH100 cluster in gcp. let it pick a region based on availability
 
 # full e2e demo script
 
-- destroy all terraform infra
 - stand up both gcp and eks clouds
-- run a few toy multi-node gpu jobs across both
+- run the above example jobs
 - demonstrate queuing
-- demo multi-gpu types
--  demonstrate framework agnosticness
+- demonstrate framework agnosticness
+
+# bonus features
+- validating capabilities. validate that a job request is schedulable before hitting Kueue.
