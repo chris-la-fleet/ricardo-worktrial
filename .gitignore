@@ -11,3 +11,8 @@ override.tf
 override.tf.json
 *_override.tf
 *_override.tf.json
+
+# Python
+*.egg-info/
+__pycache__
+*.pyc
