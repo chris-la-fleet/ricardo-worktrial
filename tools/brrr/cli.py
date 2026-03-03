@@ -48,31 +48,31 @@ def _load_configs(job_path: Path, compute_override: Path | None) -> tuple[JobCon
 
 @app.command()
 def validate(
-    file: Path = typer.Option(..., "--file", "-f", help="Path to job-config.yaml."),
+    job_config: Path = typer.Argument(..., help="Path to job-config.yaml."),
     compute_config: Path | None = typer.Option(
         None, "--compute-config", help="Optional path to compute-config.yaml."
     ),
 ) -> None:
     """Validate job and compute configuration files."""
-    _load_configs(file, compute_config)
+    _load_configs(job_config, compute_config)
     typer.echo("Config is valid.")
 
 
 @app.command()
 def render(
-    file: Path = typer.Option(..., "--file", "-f", help="Path to job-config.yaml."),
+    job_config: Path = typer.Argument(..., help="Path to job-config.yaml."),
     compute_config: Path | None = typer.Option(
         None, "--compute-config", help="Optional path to compute-config.yaml."
     ),
 ) -> None:
     """Render Kubernetes manifests to stdout."""
-    job, compute = _load_configs(file, compute_config)
+    job, compute = _load_configs(job_config, compute_config)
     typer.echo(render_yaml(job, compute), nl=False)
 
 
 @app.command()
 def submit(
-    file: Path = typer.Option(..., "--file", "-f", help="Path to job-config.yaml."),
+    job_config: Path = typer.Argument(..., help="Path to job-config.yaml."),
     compute_config: Path | None = typer.Option(
         None, "--compute-config", help="Optional path to compute-config.yaml."
     ),
@@ -83,7 +83,7 @@ def submit(
     ),
 ) -> None:
     """Render manifests and apply with kubectl."""
-    job, compute = _load_configs(file, compute_config)
+    job, compute = _load_configs(job_config, compute_config)
     rendered = render_yaml(job, compute)
 
     command = ["kubectl", "apply", "-f", "-"]

@@ -6,14 +6,14 @@ config files for `brrr`.
 ## Validate and render
 
 ```bash
-uv run brrr validate -f examples/kustomize-jobs/jobs/gpu-multinode-dtensor/job-config.yaml
-uv run brrr render -f examples/kustomize-jobs/jobs/gpu-multinode-dtensor/job-config.yaml
+uv run brrr validate examples/kustomize-jobs/gpu-multinode-dtensor/job-config.yaml
+uv run brrr render examples/kustomize-jobs/gpu-multinode-dtensor/job-config.yaml
 ```
 
 ## Submit
 
 ```bash
-uv run brrr submit -f examples/kustomize-jobs/jobs/gpu-multinode-dtensor/job-config.yaml
+uv run brrr submit examples/kustomize-jobs/gpu-multinode-dtensor/job-config.yaml
 ```
 
 ## Watch logs
@@ -27,5 +27,5 @@ kubectl logs -l app=dtensor-mesh-test --prefix --all-containers=true
 ## Cleanup
 
 ```bash
-uv run brrr render -f examples/kustomize-jobs/jobs/gpu-multinode-dtensor/job-config.yaml | kubectl delete -f -
+uv run brrr render examples/kustomize-jobs/gpu-multinode-dtensor/job-config.yaml | kubectl delete -f -
 ```

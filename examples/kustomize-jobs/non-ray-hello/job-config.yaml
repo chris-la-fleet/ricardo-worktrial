@@ -1,0 +1,15 @@
+name: non-ray-hello
+workload_type: job
+namespace: default
+queue: default-queue
+image_uri: python:3.11-slim
+entrypoint: |
+  set -euxo pipefail
+  python - <<'PY'
+  import os
+  import socket
+
+  print("hello from non-ray job")
+  print(f"hostname={socket.gethostname()}")
+  print(f"rank={os.environ.get('RANK')} world_size={os.environ.get('WORLD_SIZE')}")
+  PY

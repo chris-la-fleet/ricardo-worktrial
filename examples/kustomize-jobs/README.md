@@ -14,15 +14,16 @@ All platform-owned Kubernetes rendering logic lives in `tools/brrr`.
 From repo root:
 
 ```bash
-uv run brrr validate -f examples/kustomize-jobs/jobs/gpu-multinode-dtensor/job-config.yaml
-uv run brrr render -f examples/kustomize-jobs/jobs/gpu-multinode-dtensor/job-config.yaml
-uv run brrr submit -f examples/kustomize-jobs/jobs/gpu-multinode-dtensor/job-config.yaml
+uv run brrr validate examples/kustomize-jobs/gpu-multinode-dtensor/job-config.yaml
+uv run brrr render examples/kustomize-jobs/gpu-multinode-dtensor/job-config.yaml
+uv run brrr submit examples/kustomize-jobs/gpu-multinode-dtensor/job-config.yaml
 ```
 
 ## Current examples
 
-- `jobs/gpu-multinode-dtensor/`
-- `jobs/rayjob-remote-task-fanout/`
+- `gpu-multinode-dtensor/`
+- `non-ray-hello/`
+- `rayjob-remote-task-fanout/`
 
 ## Compute naming convention
 
