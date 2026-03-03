@@ -153,13 +153,13 @@ variable "head_machine_type" {
 variable "head_desired_nodes" {
   description = "Desired number of Ray head nodes"
   type        = number
-  default     = 1
+  default     = 0
 }
 
 variable "head_min_nodes" {
   description = "Minimum number of Ray head nodes"
   type        = number
-  default     = 1
+  default     = 0
 }
 
 variable "head_max_nodes" {

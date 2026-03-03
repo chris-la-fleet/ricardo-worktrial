@@ -46,11 +46,17 @@ Review and adjust values in `environments/eks-dev/terraform.tfvars`:
 - `region`
 - `availability_zones`
 - `public_access_cidrs`
-- Keep CPU-first defaults unless needed:
+- Keep CPU-first defaults unless needed. Non-system pools should stay at zero by default to avoid orphaned instances:
   - `enable_gpu_node_group = false`
   - `enable_head_node_group = false`
   - `enable_kuberay = false`
   - `enable_ray_cluster = false`
+  - `head_desired_nodes = 0`
+  - `head_min_nodes = 0`
+  - `cpu_worker_desired_nodes = 0`
+  - `cpu_worker_min_nodes = 0`
+  - `gpu_desired_nodes = 0`
+  - `gpu_min_nodes = 0`
 - Optional infra-only demo preset (KubeRay + RayCluster wiring):
 
 ```hcl
@@ -63,6 +69,7 @@ ray_cluster_cpu_worker_replicas = 2
 ```
 
 - This preset only provisions platform resources; demo jobs remain in `examples/`.
+- If you temporarily raise node counts for demos, set them back to zero afterward.
 - For a cheap 2-node GPU smoke test, use `examples/raw-jobs/gpu-multinode-dtensor/eks-dev-gpu-multinode-dtensor.tfvars` to override the base config at `environments/eks-dev/terraform.tfvars`.
 
 ## 5) Configure Terraform remote state

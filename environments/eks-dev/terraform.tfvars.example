@@ -44,8 +44,8 @@ system_max_nodes     = 2
 enable_head_node_group = false
 head_machine_type = "m5.2xlarge"
 head_ami_type     = "AL2023_x86_64_STANDARD"
-head_desired_nodes = 1
-head_min_nodes     = 1
+head_desired_nodes = 0
+head_min_nodes     = 0
 head_max_nodes     = 2
 
 # Optional components
@@ -55,6 +55,7 @@ enable_kuberay = false
 # Infra-only preset: multi-node KubeRay + RayCluster demo profile (commented)
 # - Keeps app/workload logic out of infra defaults
 # - Uncomment to enable a CPU-only multi-node Ray cluster baseline
+# - Reset any temporary non-zero cpu/gpu/head counts back to 0 after demos to avoid orphaned compute
 # -----------------------------------------------------------------------------
 # enable_kuberay                  = true
 # enable_ray_cluster              = true
