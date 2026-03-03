@@ -16,3 +16,6 @@ override.tf.json
 *.egg-info/
 __pycache__
 *.pyc
+
+# Local worktrees
+.worktrees/
